@@ -99,6 +99,7 @@ def load_phrasebank(zip_path: Path, expected_rows: dict[int, int] = PHRASEBANK_R
             df = pd.DataFrame(rows)
             expected = expected_rows[agreement]
             _check(len(df) == expected, f"{member}: {len(df)} rows, expected {expected}")
+            df["source_file"] = member
             frames.append(df)
     out = pd.concat(frames, ignore_index=True)
     labels = set(out["label"])
@@ -108,7 +109,7 @@ def load_phrasebank(zip_path: Path, expected_rows: dict[int, int] = PHRASEBANK_R
     return out
 
 TWITTER_LABELS = {0: "bearish", 1: "bullish", 2: "neutral"}
-TWITTER_EXPECTED_ROWS: dict[str, int | None] = {"sent_train.csv": None, "sent_valid.csv": None}
+TWITTER_EXPECTED_ROWS: dict[str, int | None] = {"sent_train.csv": 9543, "sent_valid.csv": 2388}
 
 def load_twitter(paths: dict[str, Path], expected_rows: dict[str, int | None] = TWITTER_EXPECTED_ROWS) -> pd.DataFrame:
     """Read the CSVs, keeping original order and file of origin"""
