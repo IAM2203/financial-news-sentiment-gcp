@@ -1,0 +1,17 @@
+{
+  "takala/financial_phrasebank/data/FinancialPhraseBank-v1.0.zip": {
+    "downloaded_at": "2026-11-07T01:09:06+00:00",
+    "revision": "8d3fe0c36d5feec6b3cc5e455b0fcb4820fb9964",
+    "sha256": "0e1a06c4900fdae46091d031068601e3773ba067c7cecb5b0da1dcba5ce989a6"
+  },
+  "zeroshot/twitter-financial-news-sentiment/sent_train.csv": {
+    "downloaded_at": "2026-11-07T01:09:06+00:00",
+    "revision": "ccbe24de388e287beb92dd393a335c376b350ac3",
+    "sha256": "71aa99d0d37feced03c999ec23b5b25302c92f39d69b6acb0a37aa076c5420e8"
+  },
+  "zeroshot/twitter-financial-news-sentiment/sent_valid.csv": {
+    "downloaded_at": "2026-11-07T01:09:06+00:00",
+    "revision": "ccbe24de388e287beb92dd393a335c376b350ac3",
+    "sha256": "31ea8274c98b52212daa68f2fb962811bf1913c1efe51b99765c8e2311806de6"
+  }
+}

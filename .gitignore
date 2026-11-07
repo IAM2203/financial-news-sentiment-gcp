@@ -1,0 +1,7 @@
+.venv/
+.obsidian/
+.obsidian/workspace.json
+.ipynb_checkpoints/
+data/raw/
+data/interim/
+notebooks/_archive/
