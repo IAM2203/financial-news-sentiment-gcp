@@ -68,8 +68,11 @@ TWITTER_REVISION = "ccbe24de388e287beb92dd393a335c376b350ac3"
 def download_twitter() -> dict:
     return {file: _download_pinned(TWITTER_REPO, file, TWITTER_REVISION, RAW / "twitter") for file in TWITTER_FILES}
 
-PHRASEBANK_ENCODING = "UTF-8"
+# Files Sentences_*.txt don't have bytes between 0x80 and 0x9F, meaning latin-1 
+# and cp1252 give identical text here. This is because that is the only range 
+# in which both encodings differ.
 PHRASEBANK_LABELS = {"negative", "neutral", "positive"}
+PHRASEBANK_ENCODING = "latin-1"
 PHRASEBANK_FILES = {
     100: "FinancialPhraseBank-v1.0/Sentences_AllAgree.txt",
     75: "FinancialPhraseBank-v1.0/Sentences_75Agree.txt",
