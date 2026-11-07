@@ -18,6 +18,6 @@ Registro de cada decisión del proyecto que tuvo alternativas reales: qué opcio
 | [[D-001-ruta-sin-gpus\|D-001]] | Ruta de cómputo sin GPUs en GCP | 2026-11-04 | 0 | Tomada |
 | [[D-002-proyecto-sin-organizacion\|D-002]] | Proyecto de GCP sin organización | 2026-11-04 | 0 | Tomada |
 | [[D-003-gpu-saptiva\|D-003]] | Entrenar en la GPU de Saptiva; Colab como respaldo | 2026-11-05 | 3 | Tomada |
-| [[D-004-eleccion-de-dataset\|D-004]] | Elección del dataset | 2026-11-05 | 1 | Propuesta |
+| [[D-004-eleccion-de-dataset\|D-004]] | Elección del dataset: Twitter Financial News Sentiment | 2026-11-07 | 1 | Tomada |
 
 **Estados posibles:** Propuesta · Tomada · Reemplazada por D-XXX
