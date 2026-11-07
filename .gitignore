@@ -4,4 +4,4 @@
 .ipynb_checkpoints/
 data/raw/
 data/interim/
-notebooks/_archive/
+notebooks/_archive/__pycache__/
