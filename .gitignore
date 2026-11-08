@@ -6,6 +6,6 @@ data/interim/
 notebooks/_archive/
 __pycache__/
 Claude outputs/
-.DS_Store/
+.DS_Store
 .env
 *-key.json

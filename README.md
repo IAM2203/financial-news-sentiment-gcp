@@ -79,4 +79,10 @@ Every decision with real alternatives is recorded with its options, criteria and
 
 ## Environment
 
-Python 3.12. A pinned `requirements.txt` is not in the repo yet.
+Python 3.12. Runtime dependencies are pinned in [`requirements.txt`](requirements.txt); development tools (Jupyter, matplotlib, ruff) in [`requirements-dev.txt`](requirements-dev.txt).
+
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-dev.txt
+```
