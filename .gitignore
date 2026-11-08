@@ -1,8 +1,11 @@
 .venv/
 .obsidian/
-.obsidian/workspace.json
 .ipynb_checkpoints/
 data/raw/
 data/interim/
 notebooks/_archive/
 __pycache__/
+Claude outputs/
+.DS_Store/
+.env
+*-key.json
