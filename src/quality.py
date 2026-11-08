@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-import numpy as np
+import itertools
+
 import pandas as pd
 
 
@@ -33,7 +34,7 @@ def check_nesting(df: pd.DataFrame, level_col: str = "agreement", text_col: str 
     and texts whose label differs between the two."""
     levels = sorted(df[level_col].unique(), reverse=True)
     rows = []
-    for hi, lo in zip(levels, levels[1:]):
+    for hi, lo in itertools.pairwise(levels):
         a = df[df[level_col] == hi].drop_duplicates(text_col).set_index(text_col)[label_col]
         b = df[df[level_col] == lo].drop_duplicates(text_col).set_index(text_col)[label_col]
         common = a.index.intersection(b.index)

@@ -4,8 +4,8 @@ from __future__ import annotations
 import hashlib
 import json
 import zipfile
+from datetime import UTC, datetime
 from pathlib import Path
-from datetime import datetime, timezone
 
 import pandas as pd
 from huggingface_hub import HfApi, hf_hub_download
@@ -50,7 +50,7 @@ def _download_pinned(repo_id: str, filename: str, revision: str | None, dest: Pa
     _update_manifest(f"{repo_id}/{filename}", {
         "revision": revision, 
         "sha256": sha256_of(path), 
-        "downloaded_at": datetime.now(timezone.utc).isoformat(timespec="seconds")
+        "downloaded_at": datetime.now(UTC).isoformat(timespec="seconds")
     })
     return path
 
@@ -125,7 +125,7 @@ def load_twitter(paths: dict[str, Path], expected_rows: dict[str, int | None] = 
         if expected is not None:
             _check(len(df) == expected, f"file {name} has {len(df)} rows, expected {expected}")
         df["label_name"] = df["label"].map(TWITTER_LABELS)
-        _check(df["label_name"].notna().all(), f"after mapping the expected label values there are still NaN values")
+        _check(df["label_name"].notna().all(), "after mapping the expected label values there are still NaN values")
         df["source_file"] = name
         df["row_in_file"] = range(len(df))
         frames.append(df)
