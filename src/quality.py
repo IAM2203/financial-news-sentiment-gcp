@@ -53,7 +53,7 @@ def check_nesting(df: pd.DataFrame, level_col: str = "agreement", text_col: str 
 
 def nearest_neighbors(reference: pd.Series, query: pd.Series | None = None) -> pd.DataFrame:
     """For each query text, its most similar reference text (cosine similarity on TF-IDF).
-    
+
     With query=None, compares reference against itself and never matches a row with itself.
     Positions are 0-based row positions, not index labels.
     """
