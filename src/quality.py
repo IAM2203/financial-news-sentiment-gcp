@@ -4,7 +4,10 @@ from __future__ import annotations
 
 import itertools
 
+import numpy as np
 import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.neighbors import NearestNeighbors
 
 
 def normalize_text(s: pd.Series) -> pd.Series:
@@ -47,3 +50,30 @@ def check_nesting(df: pd.DataFrame, level_col: str = "agreement", text_col: str 
         })
 
     return pd.DataFrame(rows)
+
+def nearest_neighbors(reference: pd.Series, query: pd.Series | None = None) -> pd.DataFrame:
+    """For each query text, its most similar reference text (cosine similarity on TF-IDF).
+    
+    With query=None, compares reference against itself and never matches a row with itself.
+    Positions are 0-based row positions, not index labels.
+    """
+    same = query is None
+
+    ref_key = normalize_text(reference)
+    qry_key = ref_key if same else normalize_text(query)
+
+    vec = TfidfVectorizer().fit(ref_key if same else pd.concat([ref_key, qry_key]))
+    R = vec.transform(ref_key)
+    Q = vec.transform(qry_key)
+
+    nn = NearestNeighbors(n_neighbors=2 if same else 1, metric="cosine").fit(R)
+    dist, idx = nn.kneighbors(Q)
+
+    rows = np.arange(Q.shape[0])
+    pick = np.where(idx[:, 0] == rows, 1, 0) if same else np.zeros(len(rows), dtype=int)
+
+    return pd.DataFrame({
+        "query_pos": rows,
+        "match_pos": idx[rows, pick],
+        "similarity": 1 - dist[rows, pick],
+    })

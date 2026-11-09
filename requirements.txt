@@ -1,3 +1,5 @@
 huggingface_hub==2.4.0
 pandas==3.1.1
 pyarrow==26.0.1 # needed by pandas.to_parquet
+numpy==2.5.4
+scikit-learn==1.9.1
