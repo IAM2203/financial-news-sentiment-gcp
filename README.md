@@ -6,12 +6,12 @@ Which approach is worth it for classifying the sentiment of financial news headl
 
 ## Status
 
-_Last updated: November 7, 2026_
+_Last updated: November 8, 2026_
 
 | Phase | Scope | Status |
 |---|---|---|
 | 0. Setup | GCP free-trial project; compute route under a zero GPU quota | Done |
-| 1. Data and baseline | Pinned data, quality audit, fixed split, Cloud Storage and BigQuery, TF-IDF baseline | In progress (data and quality audit done) |
+| 1. Data and baseline | Pinned data, quality audit, fixed split, Cloud Storage and BigQuery, TF-IDF baseline | In progress (data and quality audit done; near-duplicate check implemented) |
 | 2. Open model, no tuning | Gemma with prompting, same evaluation as the baseline | Planned |
 | 3. LoRA fine-tuning | Gemma fine-tuned on the training split | Planned |
 | 4. Deployment | Container on Cloud Run (CPU), prediction and latency logging | Planned |
@@ -27,7 +27,7 @@ _Last updated: November 7, 2026_
 
 ## Known limitations so far
 
-- **Near-duplicates are not checked yet.** The audit only catches exact matches after normalization. Near-duplicates could still leak between train and test; they will be checked when the split is built.
+- **Near-duplicates are not measured yet.** The audit only catches exact matches after normalization. A near-duplicate check, `quality.nearest_neighbors` (TF-IDF + cosine similarity), is implemented and tested on toy data in [`notebooks/03_split.ipynb`](notebooks/03_split.ipynb), but has not been run on the real data. Until then, near-duplicates could still leak between train and test; the similarity threshold will be fixed before the split is built.
 - **Distribution shift.** The headlines date from late 2019 to early 2020, while a deployed model would see current news, so test-set scores will likely overestimate real-world performance.
 - **Undocumented labeling.** The dataset does not describe how its labels were produced, and some labels are ambiguous.
 
@@ -58,10 +58,11 @@ _Last updated: November 7, 2026_
 ├── decisiones/                     # one file per decision (in Spanish)
 ├── notebooks/
 │   ├── 01_eda_datasets.ipynb       # offline tests, download, load, parquet round-trip
-│   └── 02_d004_measurements.ipynb  # data-quality measurements for D-004
+│   ├── 02_d004_measurements.ipynb  # data-quality measurements for D-004
+│   └── 03_split.ipynb              # near-duplicate check (split in progress)
 ├── src/
 │   ├── data.py                     # pinned downloads and validated loaders
-│   └── quality.py                  # duplicate, conflict and overlap checks
+│   └── quality.py                  # duplicate, conflict, overlap and near-duplicate checks
 ├── DECISIONES.md                   # decision log index (in Spanish)
 └── README.md
 ```
